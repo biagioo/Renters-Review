@@ -14,8 +14,8 @@ ActiveRecord::Schema.define(version: 2020_05_04_141654) do
 
   create_table "landlords", force: :cascade do |t|
     t.string "name"
-    t.text "description"
-    t.integer "years_leasing"
+    t.integer "age"
+    t.text "about"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 2020_05_04_141654) do
     t.string "street"
     t.string "city"
     t.string "state"
-    t.string "zipcode"
+    t.integer "zipcode"
     t.integer "landlord_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -46,8 +46,8 @@ ActiveRecord::Schema.define(version: 2020_05_04_141654) do
 
   create_table "tenants", force: :cascade do |t|
     t.string "name"
-    t.text "description"
-    t.integer "years_renting"
+    t.integer "age"
+    t.text "about"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

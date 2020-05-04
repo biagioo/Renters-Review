@@ -6,7 +6,7 @@ class CreateProperties < ActiveRecord::Migration[6.0]
       t.string :street
       t.string :city
       t.string :state
-      t.string :zipcode
+      t.integer :zipcode
       t.belongs_to :landlord
       
       t.timestamps
