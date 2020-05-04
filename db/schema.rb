@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_04_132832) do
+ActiveRecord::Schema.define(version: 2020_05_04_141654) do
 
   create_table "landlords", force: :cascade do |t|
     t.string "name"
@@ -18,6 +18,30 @@ ActiveRecord::Schema.define(version: 2020_05_04_132832) do
     t.integer "years_leasing"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "properties", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.string "street"
+    t.string "city"
+    t.string "state"
+    t.string "zipcode"
+    t.integer "landlord_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["landlord_id"], name: "index_properties_on_landlord_id"
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.integer "tenant_id"
+    t.integer "property_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["property_id"], name: "index_reviews_on_property_id"
+    t.index ["tenant_id"], name: "index_reviews_on_tenant_id"
   end
 
   create_table "tenants", force: :cascade do |t|
