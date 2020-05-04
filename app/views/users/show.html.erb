@@ -1,15 +1,16 @@
 <h1> User Show Page </h1>
-<p> <%=@user.email%></p>
 
-
-<%if @tenant %>
+<%if @landlord %>
+    <p> You are a listed as a Landlord.</p>
+    <p> First Name: <%=@landlord.first_name%> </p>
+    <p> Last name: <%=@landlord.last_name%> </p>
+    <p> Age: <%=@landlord.age%> </p>
+    <p> About: <%=@landlord.about%> </p>
+<%else %>
+    <p> You are a listed as a Tenant.</p>
     <p> First Name: <%=@tenant.first_name%> </p>
     <p> Last name: <%=@tenant.last_name%> </p>
     <p> Age: <%=@tenant.age%> </p>
     <p> About: <%=@tenant.about%> </p>
-<%else %>
-    <p> First Name:<%=@landlord.first_name%> </p>
-    <p> Last Name: <%=@landlord.last_name%> </p>
-    <p> Age: <%=@landlord.age%> </p>
-    <p> About:<%=@landlord.about%> </p>
 <% end %>
+<p>Email: <%=@user.email%></p>
