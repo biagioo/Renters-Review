@@ -37,12 +37,19 @@ class UsersController < ApplicationController
     end
 
     def show
-        if @user = User.find_by(id: params[:id])
-            @tenant = Tenant.find_by(id: @user.userable_id)
-            @landlord = Landlord.find_by(id: @user.userable_id)
+        if set_user
+            set_userable
         else
             redirect_to '/'
         end
+    end
+    
+    def edit 
+        
+    end
+
+    def update
+
     end
 
     def delete
@@ -57,5 +64,13 @@ class UsersController < ApplicationController
     def userable_params
         params.permit(:first_name, :last_name, :age, :about)
     end
+
+    def set_user
+        @user = User.find_by(id: params[:id])
+    end
     
+    def set_userable
+        @tenant = Tenant.find_by(id: @user.userable_id)
+        @landlord = Landlord.find_by(id: @user.userable_id)
+    end
 end

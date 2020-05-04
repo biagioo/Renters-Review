@@ -1,0 +1,17 @@
+<center><h3> Edit User: </h3></center>
+
+<%= form_with url:'/users', local: :true do |f| %>
+    <%= f.label "First Name" %>
+    <%= f.text_field :first_name %>
+    <br>
+    <%= f.label "Last_name" %>
+    <%= f.text_field :last_name %>
+    <br>
+    <%= f.label :age %>
+    <%= f.text_field :age %>
+    <br>
+    <%= f.label :about %>
+    <%= f.text_area :about %>
+
+    <%= f.submit "Save Edit"  %>
+<% end %>

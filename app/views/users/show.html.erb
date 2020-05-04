@@ -14,3 +14,5 @@
     <p> About: <%=@tenant.about%> </p>
 <% end %>
 <p>Email: <%=@user.email%></p>
+
+<p> Would you like to <%= link_to "Edit", edit_user_path(@user)%> your profile?</p>
