@@ -13,7 +13,8 @@
 ActiveRecord::Schema.define(version: 2020_05_04_141654) do
 
   create_table "landlords", force: :cascade do |t|
-    t.string "name"
+    t.string "first_name"
+    t.string "last_name"
     t.integer "age"
     t.text "about"
     t.datetime "created_at", precision: 6, null: false
@@ -45,7 +46,8 @@ ActiveRecord::Schema.define(version: 2020_05_04_141654) do
   end
 
   create_table "tenants", force: :cascade do |t|
-    t.string "name"
+    t.string "first_name"
+    t.string "last_name"
     t.integer "age"
     t.text "about"
     t.datetime "created_at", precision: 6, null: false
