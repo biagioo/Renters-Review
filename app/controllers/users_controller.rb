@@ -6,35 +6,43 @@ class UsersController < ApplicationController
 
     def create
         if params[:landlord] == "0"
-            user = Tenant.new.build_user(user_params)
-            if user.valid?
-                user.save
-                t = Tenant.find_by(id: user[:userable_id])
-                t.first_name = userable_params[:first_name]
-                t.last_name = userable_params[:last_name]
-                t.age = userable_params[:age]
-                t.about = userable_params[:about]
+            t = Tenant.new(userable_params)
+            if t.valid?
                 t.save
+                user = t.build_user(user_params)
+                if user.valid?
+                    user.save
+                    redirect_to user_path(user)
+                else
+                    render :new, alert: user.errors.full_messages
+                end
             else
-                redirect :new, alert:
+                render :new, alert: t.errors.full_messages
             end
         else
-            user = Landlord.new.build_user(user_params)
-            if user.valid?
-                user.save
-                l = Landlord.find_by(id: user[:userable_id])
-                l.first_name = userable_params[:first_name]
-                l.last_name = userable_params[:last_name]
-                l.age = userable_params[:age]
-                l.about = userable_params[:about]
+            l = Landlord.new(userable_params)
+            if l.valid?
                 l.save
+                user = l.build_user(user_params)
+                if user.valid?
+                    user.save
+                    redirect_to user_path(user)
+                else
+                    render :new, alert: user.errors.full_messages
+                end
             else
-                redirect :new, alert: user.error.full_messages
+                render :new, alert: l.errors.full_messages
             end
         end
     end
 
     def show
+        if @user = User.find_by(id: params[:id])
+            @tenant = Tenant.find_by(id: @user.userable_id)
+            @landlord = Landlord.find_by(id: @user.userable_id)
+        else
+            redirect_to '/'
+        end
     end
 
     def delete
