@@ -1,11 +1,28 @@
-<h1> Sign Up </h1>
-<%= form_for @user do |f| %>
-    <%= f.label :email %>
-    <%= f.text_field :email %><br />
+ <center><h3> New User Sign Up: </h3></center>
 
-    <%= f.label :password %>
-    <%= f.password_field :password %>
+    <%= form_with url:'/users', local: :true do |f| %>
+        <%= f.label :email %>
+        <%= f.text_field :email %>
+        <br>  
+        <%= f.label :password %>
+        <%= f.password_field :password %>
+        <br>
+        <%= f.label "First Name" %>
+        <%= f.text_field :first_name %>
+        <br>
+        <%= f.label "Last_name" %>
+        <%= f.text_field :last_name %>
+        <br>
+        <%= f.label :age %>
+        <%= f.text_field :age %>
+        <br>
+        <%= f.label :about %>
+        <%= f.text_area :about %>
+        <br>
+        <%= f.label "Check the box if you wish to sign up as a Landlord" %>
+        <%= f.check_box "landlord" %>
+     
 
-    <br />
-    <%= f.submit %>
-  <% end %>
+
+      <span class="pull-left"><%= f.submit "Create New User"  %></span>
+   <% end %>
