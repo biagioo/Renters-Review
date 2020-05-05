@@ -24,13 +24,13 @@ class UsersController < ApplicationController
             @landlord = Landlord.new(userable_params)
             if @landlord.valid?
                 @landlord.save
-                user = @landlord.build_user(user_params)
-                if user.valid?
-                    user.save
+                @user = @landlord.build_user(user_params)
+                if @user.valid?
+                    @user.save
                     set_session
-                    redirect_to user_path(user)
+                    redirect_to user_path(@user)
                 else
-                    render :new, alert: user.errors.full_messages
+                    render :new, alert: @user.errors.full_messages
                 end
             else
                 render :new, alert: @landlord.errors.full_messages
@@ -57,11 +57,11 @@ class UsersController < ApplicationController
     def update
         current_user
         set_userable
-        if @tenant
+        if @user.userable_type == "Tenant"
             @tenant.update(userable_params)
             @tenant.save
             redirect_to @user
-        elsif @landlord
+        elsif @user.userable_type == "Landlord"
             @landlord.update(userable_params)
             @landlord.save
             redirect_to @user

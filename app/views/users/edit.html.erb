@@ -1,21 +1,5 @@
 <center><h3> Edit User: </h3></center>
-<% if @tenant %>
-    <%= form_tag user_path(@user), method: "put" do %>
-        <label>First Name:</label><br>
-        <%= text_field_tag :first_name, @tenant.first_name %><br>
-        <br>
-        <label>Last Name:</label><br>
-        <%= text_field_tag :last_name, @tenant.last_name %><br>
-        <br>
-        <label>Age:</label><br>
-        <%= text_field_tag :age, @tenant.age %><br>
-        <br>
-        <label>About:</label><br>
-        <%= text_area_tag :about, @tenant.about %><br>
-
-        <%= submit_tag "Submit Post" %>
-    <% end %>
-<% else %>
+<% if @landlord %>
     <%= form_tag user_path(@user), method: "put" do %>
         <label>First Name:</label><br>
         <%= text_field_tag :first_name, @landlord.first_name %><br>
@@ -28,6 +12,24 @@
         <br>
         <label>About:</label><br>
         <%= text_area_tag :about, @landlord.about %><br>
+
+        <%= submit_tag "Submit Post" %>
+    <% end %>
+
+<% else %>
+    <% @tenant %>
+    <%= form_tag user_path(@user), method: "put" do %>
+        <label>First Name:</label><br>
+        <%= text_field_tag :first_name, @tenant.first_name %><br>
+        <br>
+        <label>Last Name:</label><br>
+        <%= text_field_tag :last_name, @tenant.last_name %><br>
+        <br>
+        <label>Age:</label><br>
+        <%= text_field_tag :age, @tenant.age %><br>
+        <br>
+        <label>About:</label><br>
+        <%= text_area_tag :about, @tenant.about %><br>
 
         <%= submit_tag "Submit Post" %>
     <% end %>
