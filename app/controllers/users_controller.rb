@@ -15,7 +15,7 @@ class UsersController < ApplicationController
                     set_session
                     redirect_to user_path(@user)
                 else
-                    render :new, alert: user.errors.full_messages
+                    render :new, alert: @user.errors
                 end
             else
                 render :new, alert: @tenant.errors.full_messages

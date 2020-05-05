@@ -13,7 +13,7 @@
         <label>About:</label><br>
         <%= text_area_tag :about, @landlord.about %><br>
 
-        <%= submit_tag "Submit Post" %>
+        <%= submit_tag "Submit Edit" %>
     <% end %>
 
 <% else %>
@@ -31,6 +31,6 @@
         <label>About:</label><br>
         <%= text_area_tag :about, @tenant.about %><br>
 
-        <%= submit_tag "Submit Post" %>
+        <%= submit_tag "Submit Edit" %>
     <% end %>
 <% end %>
