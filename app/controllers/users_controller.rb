@@ -6,32 +6,34 @@ class UsersController < ApplicationController
 
     def create
         if params[:landlord] == "0"
-            t = Tenant.new(userable_params)
-            if t.valid?
-                t.save
-                user = t.build_user(user_params)
+            @tenant = Tenant.new(userable_params)
+            if @tenant.valid?
+                @tenant.save
+                user = @tenant.build_user(user_params)
                 if user.valid?
                     user.save
+                    set_session
                     redirect_to user_path(user)
                 else
                     render :new, alert: user.errors.full_messages
                 end
             else
-                render :new, alert: t.errors.full_messages
+                render :new, alert: @tenant.errors.full_messages
             end
         else
-            l = Landlord.new(userable_params)
-            if l.valid?
-                l.save
-                user = l.build_user(user_params)
+            @landlord = Landlord.new(userable_params)
+            if @landlord.valid?
+                @landlord.save
+                user = @landlord.build_user(user_params)
                 if user.valid?
                     user.save
+                    set_session
                     redirect_to user_path(user)
                 else
                     render :new, alert: user.errors.full_messages
                 end
             else
-                render :new, alert: l.errors.full_messages
+                render :new, alert: @landlord.errors.full_messages
             end
         end
     end
