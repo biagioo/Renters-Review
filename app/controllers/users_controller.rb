@@ -46,13 +46,19 @@ class UsersController < ApplicationController
 
     def update
         if @user.userable_type == "Tenant"
-            @tenant.update(userable_params)
-            @tenant.save
-            redirect_to @user
+            if @tenant.update(userable_params)
+                @tenant.save
+                redirect_to @user
+            else
+                render :edit
+            end
         elsif @user.userable_type == "Landlord"
-            @landlord.update(userable_params)
-            @landlord.save
-            redirect_to @user
+            if @landlord.update(userable_params)
+                @landlord.save
+                redirect_to @user
+            else
+                render :edit
+            end
         else 
             render :edit
         end

@@ -37,3 +37,33 @@
     <p> Do you wish to <%= link_to "delete your account?", user_delete_path(@user), method: "delete" %></p>
     <p> Warning, once this is done, you will have to sign up again. </p>
 <% end %>
+
+<% if !@tenant.nil? && @tenant.errors.any? %>
+  <div id="error_explanation">
+    <h2>
+      <%= pluralize(@tenant.errors.count, "error") %>
+      prohibited this user from being created:
+    </h2>
+ 
+    <ul>
+    <% @tenant.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<% if !@landlord.nil? && @landlord.errors.any? %>
+  <div id="error_explanation">
+    <h2>
+      <%= pluralize(@landlord.errors.count, "error") %>
+      prohibited this user from being created:
+    </h2>
+ 
+    <ul>
+    <% @landlord.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
