@@ -15,10 +15,10 @@ class UsersController < ApplicationController
                     set_session
                     redirect_to user_path(@user)
                 else
-                    render :new, alert: @user.errors
+                    render :new
                 end
             else
-                render :new, alert: @tenant.errors.full_messages
+                render :new
             end
         else
             @landlord = Landlord.new(userable_params)
@@ -30,10 +30,10 @@ class UsersController < ApplicationController
                     set_session
                     redirect_to user_path(@user)
                 else
-                    render :new, alert: @user.errors.full_messages
+                    render :new
                 end
             else
-                render :new, alert: @landlord.errors.full_messages
+                render :new
             end
         end
     end
@@ -54,7 +54,7 @@ class UsersController < ApplicationController
             @landlord.save
             redirect_to @user
         else 
-            redirect_to root_path
+            render :edit
         end
     end
 
