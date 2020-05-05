@@ -15,7 +15,8 @@
 
         <%= submit_tag "Submit Edit" %>
     <% end %>
-
+    <p> Do you wish to <%= link_to "delete your account?", user_delete_path(@user), method: "delete" %></p>
+    <p> Warning, once this is done, you will have to sign up again. </p>
 <% else %>
     <% @tenant %>
     <%= form_tag user_path(@user), method: "put" do %>
@@ -33,4 +34,6 @@
 
         <%= submit_tag "Submit Edit" %>
     <% end %>
+    <p> Do you wish to <%= link_to "delete your account?", user_delete_path(@user), method: "delete" %></p>
+    <p> Warning, once this is done, you will have to sign up again. </p>
 <% end %>

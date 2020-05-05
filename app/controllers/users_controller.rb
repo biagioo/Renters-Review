@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
-    before_action :logged_in?, except: [:new, :create]
+    before_action :logged_in?, :current_user, :set_userable, except: [:new, :create]
+
     def new
-        
     end
 
     def create
@@ -39,24 +39,12 @@ class UsersController < ApplicationController
     end
 
     def show
-        if current_user
-            set_userable
-        else
-            redirect_to root_path
-        end
     end
     
     def edit 
-        if current_user
-            set_userable
-        else
-            redirect_to root_path
-        end
     end
 
     def update
-        current_user
-        set_userable
         if @user.userable_type == "Tenant"
             @tenant.update(userable_params)
             @tenant.save
@@ -70,6 +58,17 @@ class UsersController < ApplicationController
         end
     end
 
+    def destroy
+        if @tenant
+            @tenant.destroy
+            current_user.destroy
+        else
+            @landlord.destroy
+            current_user.destroy
+        end
+        redirect_to root_path
+    end
+
     private
 
     def user_params
@@ -81,8 +80,10 @@ class UsersController < ApplicationController
     end
     
     def set_userable
-        @tenant = Tenant.find_by(id: @user.userable_id)
-        @landlord = Landlord.find_by(id: @user.userable_id)
-        @tenant || @landlord
+        if @user.userable_type == "Tenant"
+            @tenant = Tenant.find_by(id: @user.userable_id)
+        else
+            @landlord = Landlord.find_by(id: @user.userable_id)
+        end
     end
 end
