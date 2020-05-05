@@ -42,20 +42,32 @@ class UsersController < ApplicationController
         if current_user
             set_userable
         else
-            redirect_to '/'
+            redirect_to root_path
         end
     end
     
     def edit 
-        current_user
-        byebug
+        if current_user
+            set_userable
+        else
+            redirect_to root_path
+        end
     end
 
     def update
-
-    end
-
-    def delete
+        current_user
+        set_userable
+        if @tenant
+            @tenant.update(userable_params)
+            @tenant.save
+            redirect_to @user
+        elsif @landlord
+            @landlord.update(userable_params)
+            @landlord.save
+            redirect_to @user
+        else 
+            redirect_to root_path
+        end
     end
 
     private
