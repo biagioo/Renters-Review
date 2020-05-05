@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_04_141654) do
+ActiveRecord::Schema.define(version: 2020_05_05_202652) do
 
   create_table "landlords", force: :cascade do |t|
     t.string "first_name"
@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(version: 2020_05_04_141654) do
     t.integer "userable_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "uid"
     t.index ["userable_type", "userable_id"], name: "index_users_on_userable_type_and_userable_id"
   end
 

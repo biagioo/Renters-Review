@@ -1,2 +1,9 @@
 <h1> Welcome to Renter's Review! </h1>
 
+<% if session[:user_id] && !@user.nil? %>
+  <h2>Email: <%= @user.email %></h2>
+  <h2>Facebook UID: <%= @user.uid %></h2>
+  <img src="<%= @user.image %>">
+<% else %>
+  <%= link_to('Log in with Facebook!', '/auth/facebook') %>
+<% end %>
