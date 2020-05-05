@@ -27,7 +27,7 @@
       <span class="pull-left"><%= f.submit "Create New User"  %></span>
    <% end %>
 
-   <% if !@user.nil? && @user.errors.any? %>
+<% if !@user.nil? && @user.errors.any? %>
   <div id="error_explanation">
     <h2>
       <%= pluralize(@user.errors.count, "error") %>
