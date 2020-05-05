@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-
+    before_action :logged_in?, except: [:new, :create]
     def new
         
     end
@@ -9,11 +9,11 @@ class UsersController < ApplicationController
             @tenant = Tenant.new(userable_params)
             if @tenant.valid?
                 @tenant.save
-                user = @tenant.build_user(user_params)
-                if user.valid?
-                    user.save
+                @user = @tenant.build_user(user_params)
+                if @user.valid?
+                    @user.save
                     set_session
-                    redirect_to user_path(user)
+                    redirect_to user_path(@user)
                 else
                     render :new, alert: user.errors.full_messages
                 end
@@ -39,7 +39,7 @@ class UsersController < ApplicationController
     end
 
     def show
-        if set_user
+        if current_user
             set_userable
         else
             redirect_to '/'
@@ -47,7 +47,8 @@ class UsersController < ApplicationController
     end
     
     def edit 
-        
+        current_user
+        byebug
     end
 
     def update
@@ -66,13 +67,10 @@ class UsersController < ApplicationController
     def userable_params
         params.permit(:first_name, :last_name, :age, :about)
     end
-
-    def set_user
-        @user = User.find_by(id: params[:id])
-    end
     
     def set_userable
         @tenant = Tenant.find_by(id: @user.userable_id)
         @landlord = Landlord.find_by(id: @user.userable_id)
+        @tenant || @landlord
     end
 end
